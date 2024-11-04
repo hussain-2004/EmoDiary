@@ -21,19 +21,94 @@ const provider = new GoogleAuthProvider();
 const db = getFirestore(app);
 
 // Ensure DOM is fully loaded before executing scripts
-document.addEventListener("DOMContentLoaded", () => {
+// document.addEventListener("DOMContentLoaded", () => {
     
-    // Check if the user is authenticated on diary.html
-    onAuthStateChanged(auth, (user) => {
-        if (user) {
-            // Update user profile on diary.html
-            updateUserProfile(user);  
-        } else {
-            // If the user is not authenticated, redirect them to the login page
-            alert("Please log in! Redirecting to login page.");
-            window.location.href = "index.html";  // Redirect to login page
-        }
-    });
+//     // Check if the user is authenticated on diary.html
+//     onAuthStateChanged(auth, (user) => {
+//         if (user) {
+//             // Update user profile on diary.html
+//             updateUserProfile(user);  
+//         } else {
+//             // If the user is not authenticated, redirect them to the login page
+//             alert("Please log in! Redirecting to login page.");
+//             window.location.href = "index.html";  // Redirect to login page
+//         }
+//     });
+
+//     // Function to update user profile on the diary.html page
+//     function updateUserProfile(user) {
+//         const userName = user.displayName;
+//         const userEmail = user.email;
+//         const userProfilePicture = user.photoURL;
+        
+//         // Ensure the elements exist before updating them
+//         if (document.getElementById("name")) {
+//             document.getElementById("name").textContent = userName;
+//         }
+//         if (document.getElementById("email")) {
+//             document.getElementById("email").textContent = userEmail;
+//         }
+//         if (document.getElementById("img")) {
+//             document.getElementById("img").src = userProfilePicture;
+//         }
+//         if (document.getElementById("uid")) {
+//             document.getElementById("uid").textContent = user.uid;
+//         }
+//     }
+
+//     // Submit button functionality to save data to Firestore on diary.html
+//     const submitButton = document.getElementById("submitButton");
+
+//     if (submitButton) {
+//         submitButton.addEventListener("click", async () => {
+//             const user = auth.currentUser; // Get the current authenticated user
+
+//             if (user) {
+//                 // Capture user data to save in Firestore
+//                 const userName = user.displayName;
+//                 const userEmail = user.email;
+//                 const userUid = user.uid;
+//                 const data = document.getElementById("submitButton").innerText;
+
+//                 // Define the data structure to be saved
+//                 const userData = {
+//                     UserName: userName,
+//                     Email: userEmail,
+//                     UserId: userUid,
+//                     Emotions: 9  // Example diary data (replace this with your actual input)
+//                 };
+
+//                 try {
+//                     // Save user data to Firestore in the "EmoDiary" collection
+//                     await addDoc(collection(db, "EmoDiary"), userData);
+//                     alert("Diary entry successfully saved!");
+//                 } catch (error) {
+//                     console.error("Error saving document: ", error);
+//                     alert("Error saving diary entry: " + error.message);
+//                 }
+//             } else {
+//                 alert("User is not logged in. Please log in first.");
+//             }
+//         });
+//     }
+// });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const currentPage = window.location.pathname.split("/").pop(); // Get the current page name
+
+    // Check if the user is authenticated only on diary.html
+    if (currentPage === "diary.html") {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Update user profile on diary.html
+                updateUserProfile(user);  
+            } else {
+                // If the user is not authenticated, redirect them to the login page
+                alert("Please log in! Redirecting to login page.");
+                window.location.href = "index.html";  // Redirect to login page
+            }
+        });
+    }
 
     // Function to update user profile on the diary.html page
     function updateUserProfile(user) {
@@ -68,14 +143,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 const userName = user.displayName;
                 const userEmail = user.email;
                 const userUid = user.uid;
-                const data = document.getElementById("submitButton").innerText;
+                const data = document.getElementById("textArea").value; // Assuming you want diary text from a textarea with id "textArea"
 
                 // Define the data structure to be saved
                 const userData = {
                     UserName: userName,
                     Email: userEmail,
                     UserId: userUid,
-                    Emotions: 9  // Example diary data (replace this with your actual input)
+                    DiaryEntry: data  // Replace "Emotions" with actual diary data
                 };
 
                 try {
@@ -92,6 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
 
 // Google login function on index.html page
 document.addEventListener("DOMContentLoaded", () => {
