@@ -1,0 +1,64 @@
+.navbar-brand{
+    font-size: larger;
+    font-weight: bolder;
+}
+
+.intro1{
+    background-color: #F8F9FA;
+    height: 700px;
+    width: 50%;
+    border-top-right-radius: 40%;
+    border-bottom-right-radius: 10%;
+    
+}
+
+.intro1txt{
+    padding-top: 5%;
+    text-align: center;
+    font-size: x-large;
+    /* font-weight: bolder; */
+    color: #6f8c86;
+    font-family: "Roboto", sans-serif;
+    font-weight: 540;
+    font-style: normal;
+}
+
+.intro1hed{
+    color : #004D3F;
+    font-weight: bolder;
+    padding-top: 20%;
+    text-align: center;
+    font-size:800px;
+    font-family: "Patua One", serif;
+    font-weight: 500;
+    font-style: normal;
+}
+
+/* dark green color in intro1txt */
+.drkgrn{
+    color : #004D3F;
+}
+
+/* background shade for intro 1 */
+.bgshadeforintro1{
+    /* padding:5%; */
+    border-top-right-radius: 40%;
+    border-bottom-right-radius: 10%;
+    background-image: linear-gradient(to right, #e7ebea, #cededd);
+    height: 700px;
+    padding: 10%;
+}
+
+/* intro1 singin login buttons */
+.intro1buttons{
+    padding-top: 5%;
+    padding-left: 10%;
+}
+
+/* intro1 individual buttons */
+.intro1individualbuttons{
+    border-color: #008073;
+    border-width: 3px;
+    background-color: #D4E1E0;
+    font-weight:500;
+}
